@@ -40,11 +40,18 @@
 				$ git add git-*.sh
 					Because this example lets the shell expand the asterisk (i.e. you are listing the files explicitly), it does not consider subdir/git-foo.sh.
 
-		rm --cached <file>...
-			:: To unstage
+		rm
+			:: Remove files from the working tree and from the index 
 
-			::EXAMPLE
-				git rm --cached Most\ used\ commands\ in\ Git.txt
+			--cached <file>...
+				:: To unstage
+
+				::EXAMPLE
+					git rm --cached Most\ used\ commands\ in\ Git.txt
+
+			-f
+			--force
+				:: Override the up-to-date check.
 
 
 		commit
@@ -88,8 +95,12 @@
 
 			--hard
 				:: Resets the index and working tree. Any changes to tracked files in the working tree since <commit> are discarded.
+
 			--soft
 				:: Does not touch the index file or the working tree at all (but resets the head to <commit>, just like all modes do). This leaves all your changed files "Changes to be committed", as git status would put it.
+
+			HEAD
+				
 
 		checkout
 			:: Switch branches or restore working tree files
