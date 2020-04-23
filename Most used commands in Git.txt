@@ -64,6 +64,11 @@
 					* by using the --interactive or --patch switches with the commit command to decide one by one which files or hunks should be part of the commit in addition to contents in the index, before finalizing the operation. See the “Interactive Mode” section of git-add[1] to learn how to operate these modes.
 				:: The --dry-run option can be used to obtain a summary of what is included by any of the above for the next commit by giving the same set of parameters (options and paths).
 				:: If you make a commit and then find a mistake immediately after that, you can recover from it with git reset.
+
+			-a
+			--all
+				:: Tell the command to automatically stage files that have been modified and deleted, but new files you have not told Git about are not affected.
+
 			-m <msg>
 			--message=<msg>
 				:: Use the given <msg> as the commit message. If multiple -m options are given, their values are concatenated as separate paragraphs.
@@ -109,3 +114,15 @@
 			:: EXAMPLES
 				git checkout 13120ce7ca2d733b53eac75430b4242fdf7f557d "Most\ used\ commands\ in\ Git.txt"
 				git checkout master "Most\ used\ commands\ in\ Git.txt"
+
+		branch
+			:: List, create, or delete branches
+
+		checkout
+			:: Switch branches or restore working tree files
+
+			checkout [<branch>]
+				:: To prepare for working on <branch>, switch to it by updating the index and the files in the working tree, and by pointing HEAD at the branch. Local modifications to the files in the working tree are kept, so that they can be committed to the <branch>.
+				:: If <branch> is not found but there does exist a tracking branch in exactly one remote (call it <remote>) with a matching name and --no-guess is not specified, treat as equivalent to
+					$ git checkout -b <branch> --track <remote>/<branch>
+				:: You could omit <branch>, in which case the command degenerates to "check out the current branch", which is a glorified no-op with rather expensive side-effects to show only the tracking information, if exists, for the current branch.
