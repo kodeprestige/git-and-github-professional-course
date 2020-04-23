@@ -68,6 +68,9 @@
 		log
 			:: Shows the commit logs.
 			:: The command takes options applicable to the git rev-list command to control what is shown and how, and options applicable to the git diff-* commands to control how the changes each commit introduces are shown.
+			--stat[=<width>[,<name-width>[,<count>]]]
+				:: Generate a diffstat. By default, as much space as necessary will be used for the filename part, and the rest for the graph part. Maximum width defaults to terminal width, or 80 columns if not connected to a terminal, and can be overridden by <width>. The width of the filename part can be limited by giving another width <name-width> after a comma. The width of the graph part can be limited by using --stat-graph-width=<width> (affects all commands generating a stat graph) or by setting diff.statGraphWidth=<width> (does not affect git format-patch). By giving a third parameter <count>, you can limit the output to the first <count> lines, followed by ... if there are more.
+				:: These parameters can also be set individually with --stat-width=<width>, --stat-name-width=<name-width> and --stat-count=<count>.
 
 		show
 			:: Shows one or more objects (blobs, trees, tags and commits).
@@ -87,3 +90,11 @@
 				:: Resets the index and working tree. Any changes to tracked files in the working tree since <commit> are discarded.
 			--soft
 				:: Does not touch the index file or the working tree at all (but resets the head to <commit>, just like all modes do). This leaves all your changed files "Changes to be committed", as git status would put it.
+
+		checkout
+			:: Switch branches or restore working tree files
+			<ID_COMMIT> <FILE_NAME>
+			:: Returns the file "FILE_NAME" to the version it had in the commit "ID_COMMIT"
+			:: EXAMPLES
+				git checkout 13120ce7ca2d733b53eac75430b4242fdf7f557d "Most\ used\ commands\ in\ Git.txt"
+				git checkout master "Most\ used\ commands\ in\ Git.txt"
