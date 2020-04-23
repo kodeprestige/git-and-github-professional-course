@@ -45,7 +45,7 @@
 
 			::EXAMPLE
 				git rm --cached Most\ used\ commands\ in\ Git.txt
-				
+
 
 		commit
 				:: Create a new commit containing the current contents of the index and the given log message describing the changes. The new commit is a direct child of HEAD, usually the tip of the current branch, and the branch is updated to point to it (unless no branch is associated with the working tree, in which case HEAD is "detached" as described in git-checkout[1]).
@@ -65,4 +65,25 @@
 				::EXAMPLE
 					git commit -m "Basic commands necessary to make the first commit"
 
+		log
+			:: Shows the commit logs.
+			:: The command takes options applicable to the git rev-list command to control what is shown and how, and options applicable to the git diff-* commands to control how the changes each commit introduces are shown.
 
+		show
+			:: Shows one or more objects (blobs, trees, tags and commits).
+			:: For commits it shows the log message and textual diff. It also presents the merge commit in a special format as produced by git diff-tree --cc.
+			:: For tags, it shows the tag message and the referenced objects.
+			:: For trees, it shows the names (equivalent to git ls-tree with --name-only).
+			:: For plain blobs, it shows the plain contents.
+			:: The command takes options applicable to the git diff-tree command to control how the changes the commit introduces are shown.
+
+		diff
+			:: Show changes between the working tree and the index or a tree, changes between the index and a tree, changes between two trees, changes between two blob objects, or changes between two files on disk.
+
+		reset
+			:: Resets the current head to the specific state
+
+			--hard
+				:: Resets the index and working tree. Any changes to tracked files in the working tree since <commit> are discarded.
+			--soft
+				:: Does not touch the index file or the working tree at all (but resets the head to <commit>, just like all modes do). This leaves all your changed files "Changes to be committed", as git status would put it.
