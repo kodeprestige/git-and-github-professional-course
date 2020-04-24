@@ -125,8 +125,12 @@
 			[--list]
 				:: If --list is given, or if there are no non-option arguments, existing branches are listed; the current branch will be highlighted in green and marked with an asterisk. Any branches checked out in linked worktrees will be highlighted in cyan and marked with a plus sign. Option -r causes the remote-tracking branches to be listed, and option -a shows both local and remote branches.
 
-			<branchname>
+			<branch_name>
 				:: The name of the branch to create or delete. The new branch name must pass all checks defined by git-check-ref-format[1]. Some of these checks may restrict the characters allowed in a branch name.
+
+			-d <branch_name>
+			--delete <branch_name>
+				:: Delete a branch. The branch must be fully merged in its upstream branch, or in HEAD if no upstream was set with --track or --set-upstream-to.
 
 		merge
 			:: oin two or more development histories together
