@@ -164,3 +164,19 @@
 				:: Abort the current conflict resolution process, and try to reconstruct the pre-merge state.
 				:: If there were uncommitted worktree changes present when the merge started, git merge --abort will in some cases be unable to reconstruct these changes. It is therefore recommended to always commit or stash your changes before running git merge.
 				:: git merge --abort is equivalent to git reset --merge when MERGE_HEAD is present.
+
+			remote 
+				:: Manage set of tracked repositories
+
+				-v
+				--verbose
+					:: Be a little more verbose and show remote url after name. NOTE: This must be placed between remote and subcommand.
+
+				add <name> <url>
+					:: Adds a remote named <name> for the repository at <url>. The command git fetch <name> can then be used to create and update remote-tracking branches <name>/<branch>.
+
+			push
+				:: Update remote refs along with associated objects
+
+				origin master
+					:: Find a ref that matches master in the source repository (most likely, it would find refs/heads/master), and update the same ref (e.g. refs/heads/master) in origin repository with it. If master did not exist remotely, it would be created.
