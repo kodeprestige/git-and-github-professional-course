@@ -40,154 +40,154 @@
 				$ git add git-*.sh
 					Because this example lets the shell expand the asterisk (i.e. you are listing the files explicitly), it does not consider subdir/git-foo.sh.
 
-		rm
-			:: Remove files from the working tree and from the index 
+	rm
+		:: Remove files from the working tree and from the index 
 
-			--cached <file>...
-				:: To unstage
+		--cached <file>...
+			:: To unstage
 
-				::EXAMPLE
-					git rm --cached Most\ used\ commands\ in\ Git.txt
+			::EXAMPLE
+				git rm --cached Most\ used\ commands\ in\ Git.txt
 
-			-f
-			--force
-				:: Override the up-to-date check.
+		-f
+		--force
+			:: Override the up-to-date check.
 
 
-		commit
-			:: Create a new commit containing the current contents of the index and the given log message describing the changes. The new commit is a direct child of HEAD, usually the tip of the current branch, and the branch is updated to point to it (unless no branch is associated with the working tree, in which case HEAD is "detached" as described in git-checkout[1]).
-			::The content to be committed can be specified in several ways:
-				* by using git-add[1] to incrementally "add" changes to the index before using the commit command (Note: even modified files must be "added");
-				* by using git-rm[1] to remove files from the working tree and the index, again before using the commit command;
-				* by listing files as arguments to the commit command (without --interactive or --patch switch), in which case the commit will ignore changes staged in the index, and instead record the current content of the listed files (which must already be known to Git);
-				* by using the -a switch with the commit command to automatically "add" changes from all known files (i.e. all files that are already listed in the index) and to automatically "rm" files in the index that have been removed from the working tree, and then perform the actual commit;
-				* by using the --interactive or --patch switches with the commit command to decide one by one which files or hunks should be part of the commit in addition to contents in the index, before finalizing the operation. See the “Interactive Mode” section of git-add[1] to learn how to operate these modes.
+	commit
+		:: Create a new commit containing the current contents of the index and the given log message describing the changes. The new commit is a direct child of HEAD, usually the tip of the current branch, and the branch is updated to point to it (unless no branch is associated with the working tree, in which case HEAD is "detached" as described in git-checkout[1]).
+		::The content to be committed can be specified in several ways:
+			* by using git-add[1] to incrementally "add" changes to the index before using the commit command (Note: even modified files must be "added");
+			* by using git-rm[1] to remove files from the working tree and the index, again before using the commit command;
+			* by listing files as arguments to the commit command (without --interactive or --patch switch), in which case the commit will ignore changes staged in the index, and instead record the current content of the listed files (which must already be known to Git);
+			* by using the -a switch with the commit command to automatically "add" changes from all known files (i.e. all files that are already listed in the index) and to automatically "rm" files in the index that have been removed from the working tree, and then perform the actual commit;
+			* by using the --interactive or --patch switches with the commit command to decide one by one which files or hunks should be part of the commit in addition to contents in the index, before finalizing the operation. See the “Interactive Mode” section of git-add[1] to learn how to operate these modes.
 			:: The --dry-run option can be used to obtain a summary of what is included by any of the above for the next commit by giving the same set of parameters (options and paths).
 			:: If you make a commit and then find a mistake immediately after that, you can recover from it with git reset.
 
-			-a
-			--all
-				:: Tell the command to automatically stage files that have been modified and deleted, but new files you have not told Git about are not affected.
+		-a
+		--all
+			:: Tell the command to automatically stage files that have been modified and deleted, but new files you have not told Git about are not affected.
 
-			-m <msg>
-			--message=<msg>
-				:: Use the given <msg> as the commit message. If multiple -m options are given, their values are concatenated as separate paragraphs.
-				:: The -m option is mutually exclusive with -c, -C, and -F.
+		-m <msg>
+		--message=<msg>
+			:: Use the given <msg> as the commit message. If multiple -m options are given, their values are concatenated as separate paragraphs.
+			:: The -m option is mutually exclusive with -c, -C, and -F.
 
-				::EXAMPLE
-					git commit -m "Basic commands necessary to make the first commit"
+			::EXAMPLE
+				git commit -m "Basic commands necessary to make the first commit"
 
-			--amend
-				:: This will open your $EDITOR and let you change the message. Continue with your usual git push origin master.
+		--amend
+			:: This will open your $EDITOR and let you change the message. Continue with your usual git push origin master.
 
-		log
-			:: Shows the commit logs.
-			:: The command takes options applicable to the git rev-list command to control what is shown and how, and options applicable to the git diff-* commands to control how the changes each commit introduces are shown.
-			--stat[=<width>[,<name-width>[,<count>]]]
-				:: Generate a diffstat. By default, as much space as necessary will be used for the filename part, and the rest for the graph part. Maximum width defaults to terminal width, or 80 columns if not connected to a terminal, and can be overridden by <width>. The width of the filename part can be limited by giving another width <name-width> after a comma. The width of the graph part can be limited by using --stat-graph-width=<width> (affects all commands generating a stat graph) or by setting diff.statGraphWidth=<width> (does not affect git format-patch). By giving a third parameter <count>, you can limit the output to the first <count> lines, followed by ... if there are more.
-				:: These parameters can also be set individually with --stat-width=<width>, --stat-name-width=<name-width> and --stat-count=<count>.
+	log
+		:: Shows the commit logs.
+		:: The command takes options applicable to the git rev-list command to control what is shown and how, and options applicable to the git diff-* commands to control how the changes each commit introduces are shown.
+	
+		--stat[=<width>[,<name-width>[,<count>]]]
+			:: Generate a diffstat. By default, as much space as necessary will be used for the filename part, and the rest for the graph part. Maximum width defaults to terminal width, or 80 columns if not connected to a terminal, and can be overridden by <width>. The width of the filename part can be limited by giving another width <name-width> after a comma. The width of the graph part can be limited by using --stat-graph-width=<width> (affects all commands generating a stat graph) or by setting diff.statGraphWidth=<width> (does not affect git format-patch). By giving a third parameter <count>, you can limit the output to the first <count> lines, followed by ... if there are more.
+			:: These parameters can also be set individually with --stat-width=<width>, --stat-name-width=<name-width> and --stat-count=<count>.
 
-		show
-			:: Shows one or more objects (blobs, trees, tags and commits).
-			:: For commits it shows the log message and textual diff. It also presents the merge commit in a special format as produced by git diff-tree --cc.
-			:: For tags, it shows the tag message and the referenced objects.
-			:: For trees, it shows the names (equivalent to git ls-tree with --name-only).
-			:: For plain blobs, it shows the plain contents.
-			:: The command takes options applicable to the git diff-tree command to control how the changes the commit introduces are shown.
+	show
+		:: Shows one or more objects (blobs, trees, tags and commits).
+		:: For commits it shows the log message and textual diff. It also presents the merge commit in a special format as produced by git diff-tree --cc.
+		:: For tags, it shows the tag message and the referenced objects.
+		:: For trees, it shows the names (equivalent to git ls-tree with --name-only).
+		:: For plain blobs, it shows the plain contents.
+		:: The command takes options applicable to the git diff-tree command to control how the changes the commit introduces are shown.
 
-		diff
-			:: Show changes between the working tree and the index or a tree, changes between the index and a tree, changes between two trees, changes between two blob objects, or changes between two files on disk.
+	diff
+		:: Show changes between the working tree and the index or a tree, changes between the index and a tree, changes between two trees, changes between two blob objects, or changes between two files on disk.
 
-		reset
-			:: Resets the current head to the specific state
+	reset
+		:: Resets the current head to the specific state
 
-			--hard
-				:: Resets the index and working tree. Any changes to tracked files in the working tree since <commit> are discarded.
+		--hard
+			:: Resets the index and working tree. Any changes to tracked files in the working tree since <commit> are discarded.
 
-			--soft
-				:: Does not touch the index file or the working tree at all (but resets the head to <commit>, just like all modes do). This leaves all your changed files "Changes to be committed", as git status would put it.
+		--soft
+			:: Does not touch the index file or the working tree at all (but resets the head to <commit>, just like all modes do). This leaves all your changed files "Changes to be committed", as git status would put it.
 
-			HEAD
-				
+		HEAD				
 
-		checkout
-			:: Switch branches or restore working tree files
+	checkout
+		:: Switch branches or restore working tree files
 
-			<ID_COMMIT> <FILE_NAME>
+		<ID_COMMIT> <FILE_NAME>
 			:: Returns the file "FILE_NAME" to the version it had in the commit "ID_COMMIT"
 			:: EXAMPLES
 				git checkout 13120ce7ca2d733b53eac75430b4242fdf7f557d "Most\ used\ commands\ in\ Git.txt"
 				git checkout master "Most\ used\ commands\ in\ Git.txt"
 
-			--detach [<branch>]
-			[--detach] <commit>
-				:: Prepare to work on top of <commit>, by detaching HEAD at it (see "DETACHED HEAD" section), and updating the index and the files in the working tree. Local modifications to the files in the working tree are kept, so that the resulting working tree will be the state recorded in the commit plus the local modifications.
-				:: When the <commit> argument is a branch name, the --detach option can be used to detach HEAD at the tip of the branch (git checkout <branch> would check out that branch without detaching HEAD).
-				:: Omitting <branch> detaches HEAD at the tip of the current branch.
+		--detach [<branch>]
+		[--detach] <commit>
+			:: Prepare to work on top of <commit>, by detaching HEAD at it (see "DETACHED HEAD" section), and updating the index and the files in the working tree. Local modifications to the files in the working tree are kept, so that the resulting working tree will be the state recorded in the commit plus the local modifications.
+			:: When the <commit> argument is a branch name, the --detach option can be used to detach HEAD at the tip of the branch (git checkout <branch> would check out that branch without detaching HEAD).
+			:: Omitting <branch> detaches HEAD at the tip of the current branch.
 
-				[<branch>]
-				:: To prepare for working on <branch>, switch to it by updating the index and the files in the working tree, and by pointing HEAD at the branch. Local modifications to the files in the working tree are kept, so that they can be committed to the <branch>.
-				:: If <branch> is not found but there does exist a tracking branch in exactly one remote (call it <remote>) with a matching name and --no-guess is not specified, treat as equivalent to
-					$ git checkout -b <branch> --track <remote>/<branch>
-				:: You could omit <branch>, in which case the command degenerates to "check out the current branch", which is a glorified no-op with rather expensive side-effects to show only the tracking information, if exists, for the current branch.
+		[<branch>]
+			:: To prepare for working on <branch>, switch to it by updating the index and the files in the working tree, and by pointing HEAD at the branch. Local modifications to the files in the working tree are kept, so that they can be committed to the <branch>.
+			:: If <branch> is not found but there does exist a tracking branch in exactly one remote (call it <remote>) with a matching name and --no-guess is not specified, treat as equivalent to
+				$ git checkout -b <branch> --track <remote>/<branch>
+			:: You could omit <branch>, in which case the command degenerates to "check out the current branch", which is a glorified no-op with rather expensive side-effects to show only the tracking information, if exists, for the current branch.
 
-			-b|-B <new_branch> [<start point>]
-				:: Specifying -b causes a new branch to be created as if git-branch[1] were called and then checked out. In this case you can use the --track or --no-track options, which will be passed to git branch. As a convenience, --track without -b implies branch creation; see the description of --track below.
-				:: If -B is given, <new_branch> is created if it doesn’t exist; otherwise, it is reset. This is the transactional equivalent of
-					$ git branch -f <branch> [<start point>]
-					$ git checkout <branch>
-				:: that is to say, the branch is not reset/created unless "git checkout" is successful.
+		-b|-B <new_branch> [<start point>]
+			:: Specifying -b causes a new branch to be created as if git-branch[1] were called and then checked out. In this case you can use the --track or --no-track options, which will be passed to git branch. As a convenience, --track without -b implies branch creation; see the description of --track below.
+			:: If -B is given, <new_branch> is created if it doesn’t exist; otherwise, it is reset. This is the transactional equivalent of
+				$ git branch -f <branch> [<start point>]
+				$ git checkout <branch>
+			:: that is to say, the branch is not reset/created unless "git checkout" is successful.
 
-		branch
-			[--list]
-				:: If --list is given, or if there are no non-option arguments, existing branches are listed; the current branch will be highlighted in green and marked with an asterisk. Any branches checked out in linked worktrees will be highlighted in cyan and marked with a plus sign. Option -r causes the remote-tracking branches to be listed, and option -a shows both local and remote branches.
+	branch
+		[--list]
+			:: If --list is given, or if there are no non-option arguments, existing branches are listed; the current branch will be highlighted in green and marked with an asterisk. Any branches checked out in linked worktrees will be highlighted in cyan and marked with a plus sign. Option -r causes the remote-tracking branches to be listed, and option -a shows both local and remote branches.
 
-			<branch_name>
-				:: The name of the branch to create or delete. The new branch name must pass all checks defined by git-check-ref-format[1]. Some of these checks may restrict the characters allowed in a branch name.
+		<branch_name>
+			:: The name of the branch to create or delete. The new branch name must pass all checks defined by git-check-ref-format[1]. Some of these checks may restrict the characters allowed in a branch name.
 
-			-d <branch_name>
-			--delete <branch_name>
-				:: Delete a branch. The branch must be fully merged in its upstream branch, or in HEAD if no upstream was set with --track or --set-upstream-to.
+		-d <branch_name>
+		--delete <branch_name>
+			:: Delete a branch. The branch must be fully merged in its upstream branch, or in HEAD if no upstream was set with --track or --set-upstream-to.
 
-		merge
-			:: Join two or more development histories together
+	merge
+		:: Join two or more development histories together
 
-			<branch>
-				:: Assume the following history exists and the current branch is "master":
+		<branch>
+			:: Assume the following history exists and the current branch is "master":
 
-	 			::   A---B---C topic
-	 				/
-    				D---E---F---G master
-				::	Then "git merge topic" will replay the changes made on the topic branch since it diverged from master (i.e., E) until its current commit (C) on top of master, and record the result in a new commit along with the names of the two parent commits and a log message from the user describing the changes.
+ 			::   A---B---C topic
+ 				/
+   				D---E---F---G master
+			::	Then "git merge topic" will replay the changes made on the topic branch since it diverged from master (i.e., E) until its current commit (C) on top of master, and record the result in a new commit along with the names of the two parent commits and a log message from the user describing the changes.
 
-			--abort
-				:: Abort the current conflict resolution process, and try to reconstruct the pre-merge state.
-				:: If there were uncommitted worktree changes present when the merge started, git merge --abort will in some cases be unable to reconstruct these changes. It is therefore recommended to always commit or stash your changes before running git merge.
-				:: git merge --abort is equivalent to git reset --merge when MERGE_HEAD is present.
+		--abort
+			:: Abort the current conflict resolution process, and try to reconstruct the pre-merge state.
+			:: If there were uncommitted worktree changes present when the merge started, git merge --abort will in some cases be unable to reconstruct these changes. It is therefore recommended to always commit or stash your changes before running git merge.
+			:: git merge --abort is equivalent to git reset --merge when MERGE_HEAD is present.
 
-			remote 
-				:: Manage set of tracked repositories
+	remote 
+		:: Manage set of tracked repositories
 
-				-v
-				--verbose
-					:: Be a little more verbose and show remote url after name. NOTE: This must be placed between remote and subcommand.
+		-v
+		--verbose
+			:: Be a little more verbose and show remote url after name. NOTE: This must be placed between remote and subcommand.
 
-				add <name> <url>
-					:: Adds a remote named <name> for the repository at <url>. The command git fetch <name> can then be used to create and update remote-tracking branches <name>/<branch>.
+		add <name> <url>
+			:: Adds a remote named <name> for the repository at <url>. The command git fetch <name> can then be used to create and update remote-tracking branches <name>/<branch>.
 					
-				set-url <name> <newurl>
-					:: Changes URLs for the remote. Sets first URL for remote <name> that matches regex <oldurl> (first URL if no <oldurl> is given) to <newurl>. If <oldurl> doesn’t match any URL, an error occurs and nothing is changed.
+		set-url <name> <newurl>
+			:: Changes URLs for the remote. Sets first URL for remote <name> that matches regex <oldurl> (first URL if no <oldurl> is given) to <newurl>. If <oldurl> doesn’t match any URL, an error occurs and nothing is changed.
 
-			push
-				:: Update remote refs along with associated objects
+	push
+		:: Update remote refs along with associated objects
 
-				origin master
-					:: Find a ref that matches master in the source repository (most likely, it would find refs/heads/master), and update the same ref (e.g. refs/heads/master) in origin repository with it. If master did not exist remotely, it would be created.
+		origin master
+			:: Find a ref that matches master in the source repository (most likely, it would find refs/heads/master), and update the same ref (e.g. refs/heads/master) in origin repository with it. If master did not exist remotely, it would be created.
 
-			pull
-				:: Fetch from and integrate with another repository or a local branch
+	pull
+		:: Fetch from and integrate with another repository or a local branch
 
-				:: Often people use git pull without giving any parameter. Traditionally, this has been equivalent to saying git pull origin. However, when configuration branch.<name>.remote is present while on branch <name>, that value is used instead of origin.
+		:: Often people use git pull without giving any parameter. Traditionally, this has been equivalent to saying git pull origin. However, when configuration branch.<name>.remote is present while on branch <name>, that value is used instead of origin.
 
-				--allow-unrelated-histories
-					:: By default, git merge command refuses to merge histories that do not share a common ancestor. This option can be used to override this safety when merging histories of two projects that started their lives independently. As that is a very rare occasion, no configuration variable to enable this by default exists and will not be added.
+		--allow-unrelated-histories
+			:: By default, git merge command refuses to merge histories that do not share a common ancestor. This option can be used to override this safety when merging histories of two projects that started their lives independently. As that is a very rare occasion, no configuration variable to enable this by default exists and will not be added.
