@@ -205,6 +205,9 @@
 		<origin> -delete <tagname>
 			Delete a tag (<tagname>) from the remote repository (<origin>)
 
+		origin <branchname>
+			:: Publish a local branch to the remote repository.
+
 	pull
 		:: Fetch from and integrate with another repository or a local branch
 
