@@ -235,5 +235,10 @@
 		--tags
 			:: Limit to "refs/heads" and "refs/tags", respectively. These options are not mutually exclusive; when given both, references stored in "refs/heads" and "refs/tags" are displayed.
 
+<<<<<<< HEAD
 	clone
 		:: Clone a repository into a new directory
+=======
+	rebase
+		:: Reapply commits on top of another base tip
+>>>>>>> rebase
