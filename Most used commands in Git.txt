@@ -246,3 +246,23 @@
 
 		--abort
 			:: Abort the rebase operation and reset HEAD to the original branch. If <branch> was provided when the rebase operation was started, then HEAD will be reset to <branch>. Otherwise HEAD will be reset to where it was when the rebase operation was started.
+
+	stash
+		:: Stash the changes in a dirty working directory away
+
+		pop [--index] [-q|--quiet] [<stash>]
+			:: Remove a single stashed state from the stash list and apply it on top of the current working tree state, i.e., do the inverse operation of git stash push. The working directory must match the index.
+			:: Applying the state can fail with conflicts; in this case, it is not removed from the stash list. You need to resolve the conflicts by hand and call git stash drop manually afterwards.
+
+		drop [-q|--quiet] [<stash>]
+			:: Remove a single stash entry from the list of stash entries.
+
+		list [<options>]
+			:: List the stash entries that you currently have. Each stash entry is listed with its name (e.g. stash@{0} is the latest entry, stash@{1} is the one before, etc.), the name of the branch that was current when the entry was made, and a short description of the commit the entry was based on.
+				stash@{0}: WIP on submit: 6ebd0e2... Update git-stash documentation
+				stash@{1}: On master: 9cc0589... Add git-stash
+			:: The command takes options applicable to the git log command to control what is shown and how. See git-log.
+		
+		branch <branchname> [<stash>]
+			:: Creates and checks out a new branch named <branchname> starting from the commit at which the <stash> was originally created, applies the changes recorded in <stash> to the new working tree and index. If that succeeds, and <stash> is a reference of the form stash@{<revision>}, it then drops the <stash>.
+			:: This is useful if the branch on which you ran git stash push has changed enough that git stash apply fails due to conflicts. Since the stash entry is applied on top of the commit that was HEAD at the time git stash was run, it restores the originally stashed state with no conflicts.
