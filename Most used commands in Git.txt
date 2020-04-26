@@ -240,3 +240,9 @@
 		
 	rebase
 		:: Reapply commits on top of another base tip
+
+		--continue
+			:: Restart the rebasing process after having resolved a merge conflict.
+
+		--abort
+			:: Abort the rebase operation and reset HEAD to the original branch. If <branch> was provided when the rebase operation was started, then HEAD will be reset to <branch>. Otherwise HEAD will be reset to where it was when the rebase operation was started.
