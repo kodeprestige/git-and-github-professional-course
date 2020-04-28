@@ -266,3 +266,18 @@
 		branch <branchname> [<stash>]
 			:: Creates and checks out a new branch named <branchname> starting from the commit at which the <stash> was originally created, applies the changes recorded in <stash> to the new working tree and index. If that succeeds, and <stash> is a reference of the form stash@{<revision>}, it then drops the <stash>.
 			:: This is useful if the branch on which you ran git stash push has changed enough that git stash apply fails due to conflicts. Since the stash entry is applied on top of the commit that was HEAD at the time git stash was run, it restores the originally stashed state with no conflicts.
+
+		clean
+			:: Remove untracked files from the working tree
+
+			-n
+			--dry-run
+				:: Don’t actually remove anything, just show what would be done.
+
+			-f
+			--force
+				:: If the Git configuration variable clean.requireForce is not set to false, git clean will refuse to delete files or directories unless given -f or -i. Git will refuse to modify untracked nested git repositories (directories with a .git subdirectory) unless a second -f is given.
+
+			-i
+			--interactive
+				:: Show what would be done and clean files interactively. See “Interactive mode” for details.
