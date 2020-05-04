@@ -102,6 +102,12 @@
 		--oneline
 			:: This is a shorthand for "--pretty=oneline --abbrev-commit" used together.
 
+		-S <string>
+			:: Look for differences that change the number of occurrences of the specified string (i.e. addition/deletion) in a file. Intended for the scripter’s use.
+			:: It is useful when you’re looking for an exact block of code (like a struct), and want to know the history of that block since it first came into being: use the feature iteratively to feed the interesting block in the preimage back into -S, and keep going until you get the very first version of the block.
+
+Binary files are searched as well.
+
 	show
 		:: Shows one or more objects (blobs, trees, tags and commits).
 		:: For commits it shows the log message and textual diff. It also presents the merge commit in a special format as produced by git diff-tree --cc.
@@ -284,3 +290,15 @@
 
 		reflog
 			:: Manage reflog information
+
+		grep
+			<pattern>
+				:: Print lines matching a pattern
+
+			-n
+			--line-number
+				:: Prefix the line number to matching lines.
+
+			-c
+			--count
+				:: Instead of showing every matched line, show the number of lines that match.
